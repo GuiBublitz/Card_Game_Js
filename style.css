@@ -1,10 +1,44 @@
 :root{
     --card-width: 157px;
     --card-height: 220px;
+    --num-cards: 4;
+    --cards-horizontal-space: 100px;
+}
+body{
+    height: 100vh;
+}
+main{
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
 }
 .card-container{
-    margin-top: 30px;
     position: relative;
+    height: 100%;
+    width: calc(var(--card-width) * (var(--num-cards) / 2) + var(--cards-horizontal-space));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1rf 1rf;
+    grid-template-areas: "a b" 
+                         "c d";
+    border: 2px solid black;
+}
+.card-pos-a{
+    grid-area: a;
+    border: 2px solid black;
+}
+.card-pos-b{
+    grid-area: b;
+    border: 2px solid black;
+}
+.card-pos-c{
+    grid-area: c;
+    border: 2px solid black;
+}
+.card-pos-d{
+    grid-area: d;
+    border: 2px solid black;
 }
 .card{
     position: absolute;
