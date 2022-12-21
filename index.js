@@ -1,0 +1,57 @@
+const cardObjectDefinitions = [
+    {id:1, imagePath:'/images/card-KingHearts.png'   },
+    {id:2, imagePath:'/images/card-JackClubs.png'    },
+    {id:3, imagePath:'/images/card-QueenDiamonds.png'},
+    {id:4, imagePath:'/images/card-AceSpades.png'    }
+]
+const cardBackImgPath = '/images/card-back-blue.png';
+const cardContainerEl = document.querySelector('.card-container');
+
+function createCard(cardItem){
+
+    // Create div elements that make up a card 
+    const cardEl = createEl('div', {
+        class:'card', 
+        id: cardItem.id
+    });
+    const cardInnerEl = createEl('div', {
+        class:'card-inner'
+    });
+    const cardFrontEl = createEl('div', {
+        class:'card-front'
+    });
+    const cardBackEl  = createEl('div', {
+        class:'card-back'
+    });
+
+    // Create front and back image elements for a card
+    const cardFrontImg = createEl('img', {
+        class:'card-img',
+        src: cardItem.imagePath
+    });
+    const cardBackImg  = createEl('img', {
+        class:'card-img',
+        src: cardBackImgPath
+    });
+
+    // Set respective children into their parents 
+    cardFrontEl.insertElements(cardFrontImg); 
+    cardBackEl.insertElements(cardBackImg);
+    cardInnerEl.insertElements(cardFrontEl, cardBackEl);
+    cardEl.insertElements(cardInnerEl);
+
+}
+ 
+function createEl(elType, listAttributes = {}) {
+    const el = document.createElement(elType);
+    for (const atrName in listAttributes) {
+        el.setAttribute(atrName, listAttributes[atrName]);
+    }
+    return el;
+}
+
+HTMLElement.prototype.insertElements = function(...elements) {
+    elements.forEach(el=>{
+        this.appendChild(el);
+    })
+}
