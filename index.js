@@ -7,12 +7,18 @@ const cardObjectDefinitions = [
 const cardBackImgPath = '/images/card-back-blue.png';
 const cardContainerEl = document.querySelector('.card-container');
 
-function createCard(cardItem){
+function dealCards() {
+    cardObjectDefinitions.forEach(cardData => {
+        createCard(cardData);
+    })
+}
+
+function createCard(cardData){
 
     // Create div elements that make up a card 
     const cardEl = createEl('div', {
         class:'card', 
-        id: cardItem.id
+        id: cardData.id
     });
     const cardInnerEl = createEl('div', {
         class:'card-inner'
@@ -27,7 +33,7 @@ function createCard(cardItem){
     // Create front and back image elements for a card
     const cardFrontImg = createEl('img', {
         class:'card-img',
-        src: cardItem.imagePath
+        src: cardData.imagePath
     });
     const cardBackImg  = createEl('img', {
         class:'card-img',
@@ -39,6 +45,8 @@ function createCard(cardItem){
     cardBackEl.insertElements(cardBackImg);
     cardInnerEl.insertElements(cardFrontEl, cardBackEl);
     cardEl.insertElements(cardInnerEl);
+    
+    addCardToGridCell(cardEl);
 
 }
  
@@ -50,8 +58,14 @@ function createEl(elType, listAttributes = {}) {
     return el;
 }
 
+function addCardToGridCell(cardEl) {
+    cardContainerEl.children[cardEl.id - 1].insertElements(cardEl);
+}
+
 HTMLElement.prototype.insertElements = function(...elements) {
     elements.forEach(el=>{
         this.appendChild(el);
     })
 }
+
+dealCards();
