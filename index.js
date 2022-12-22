@@ -6,6 +6,32 @@ const cardObjectDefinitions = [
 ]
 const cardBackImgPath = '/images/card-back-blue.png';
 const cardContainerEl = document.querySelector('.card-container');
+const playGameButtonEl = document.getElementById('playGame');
+
+function loadGame() {
+    dealCards();
+
+    playGameButtonEl.addEventListener('click', () => {
+        startGame();
+    })
+}
+
+function startGame() {
+    initializeNewGame();
+    startRound();
+}
+
+function initializeNewGame() {
+
+}
+
+function startRound() {
+    initializeNewRound();
+}
+
+function initializeNewRound() {
+
+}
 
 function dealCards() {
     cardObjectDefinitions.forEach(cardData => {
@@ -68,4 +94,4 @@ HTMLElement.prototype.insertElements = function(...elements) {
     })
 }
 
-dealCards();
+loadGame();
