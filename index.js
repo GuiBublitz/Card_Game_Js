@@ -17,7 +17,23 @@ function loadGame() {
     playGameButtonEl.addEventListener('click', () => {
         startGame();
     })
+}
 
+function flipCard(card, flipToBack) {
+    const innerCardEl = card.firstChild;
+    if (flipToBack && !innerCardEl.classList.contains('flip-it')) {
+        innerCardEl.classList.add('flip-it');
+    } else if (innerCardEl.classList.contains('flip-it')) {
+        innerCardEl.classList.remove('flip-it');
+    }
+}
+
+function flipCards(flipToBack) {
+    cards.forEach((card, index) => {
+        setTimeout(()=>{
+            flipCard(card, flipToBack);
+        }, index * 100);
+    })
 }
 
 function startGame() {
@@ -32,6 +48,7 @@ function initializeNewGame() {
 function startRound() {
     initializeNewRound();
     collectCards();
+    flipCards(true);
 }
 
 function initializeNewRound() {
