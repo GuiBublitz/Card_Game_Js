@@ -13,13 +13,13 @@ main{
     justify-content: center;
     border: 2px solid black;
 }
-.card-container{
+.cards-container{
     position: relative;
     height: 100%;
     width: calc(var(--card-width) * (var(--num-cards) / 2) + var(--cards-horizontal-space));
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1rf 1rf;
+    grid-template-rows: 1fr 1fr;
     grid-template-areas: "a b" 
                          "c d";
     border: 2px solid black;

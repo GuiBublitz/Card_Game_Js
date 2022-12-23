@@ -5,15 +5,19 @@ const cardObjectDefinitions = [
     {id:4, imagePath:'/images/card-AceSpades.png'    }
 ]
 const cardBackImgPath = '/images/card-back-blue.png';
-const cardContainerEl = document.querySelector('.card-container');
+const cardsContainerEl = document.querySelector('.cards-container');
 const playGameButtonEl = document.getElementById('playGame');
+const collapseGridAreaTemplate = '"a a" "a a"';
+const cardCollectionCellClass = ".card-pos-a";
+let cards = [];
 
 function loadGame() {
     dealCards();
-
+    cards = document.querySelectorAll('.card');
     playGameButtonEl.addEventListener('click', () => {
         startGame();
     })
+
 }
 
 function startGame() {
@@ -27,10 +31,27 @@ function initializeNewGame() {
 
 function startRound() {
     initializeNewRound();
+    collectCards();
 }
 
 function initializeNewRound() {
 
+}
+
+function collectCards() {
+    transformGridArea(collapseGridAreaTemplate);
+    addCardsToGridAreaCell(cardCollectionCellClass)
+}
+
+function transformGridArea(areas) {
+    cardsContainerEl.style.gridTemplateAreas = areas;
+}
+
+function addCardsToGridAreaCell(cellPositionClassName) {
+    const cellPositionEl = document.querySelector(cellPositionClassName);
+    cards.forEach((card, index) => {
+        cellPositionEl.insertElements(card);
+    })
 }
 
 function dealCards() {
@@ -85,7 +106,7 @@ function createEl(elType, listAttributes = {}) {
 }
 
 function addCardToGridCell(cardEl) {
-    cardContainerEl.children[cardEl.id - 1].insertElements(cardEl);
+    cardsContainerEl.children[cardEl.id - 1].insertElements(cardEl);
 }
 
 HTMLElement.prototype.insertElements = function(...elements) {
