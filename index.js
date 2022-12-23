@@ -9,6 +9,8 @@ const cardsContainerEl = document.querySelector('.cards-container');
 const playGameButtonEl = document.getElementById('playGame');
 const collapseGridAreaTemplate = '"a a" "a a"';
 const cardCollectionCellClass = ".card-pos-a";
+const numCards = cardObjectDefinitions.length;
+let cardPositions = [];
 let cards = [];
 
 function loadGame() {
@@ -71,6 +73,27 @@ function addCardsToGridAreaCell(cellPositionClassName) {
     })
 }
 
+function shuffleCards() {
+    const id = setInterval(shuffle, 12);
+    let shuffleCount = 0;
+    function shuffle() {
+        randomizeCardPositions();
+        if (shuffleCount == 500) {
+            clearInterval(id);
+        } else {
+            shuffleCount++;
+        }
+    }
+}
+
+function randomizeCardPositions() {
+    const random1 = Math.floor(Math.random() * numCards) + 1;
+    const random2 = Math.floor(Math.random() * numCards) + 1;
+    const temp = cardPositions[random1 - 1];
+    cardPositions[random1 - 1] = cardPositions[random2 - 1];
+    cardPositions[random2 - 1] = temp;
+}
+
 function dealCards() {
     cardObjectDefinitions.forEach(cardData => {
         createCard(cardData);
@@ -112,6 +135,11 @@ function createCard(cardData){
     
     addCardToGridCell(cardEl);
 
+    initializeCardPositions(cardEl); 
+
+}
+function initializeCardPositions(card) {
+    cardPositions.push(card.id);
 }
  
 function createEl(elType, listAttributes = {}) {
